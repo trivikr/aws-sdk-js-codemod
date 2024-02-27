@@ -1,16 +1,7 @@
-import {
-  Collection,
-  Identifier,
-  JSCodeshift,
-  ObjectPattern,
-  ObjectProperty,
-  Property,
-  VariableDeclarator,
-} from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
-import { removeDeclaration } from "./removeDeclaration";
+import { addTopLevelComments } from "./addTopLevelComments";
+import { getRequireObjectPatternProperty } from "./getRequireObjectPatternProperty";
 
 export interface RemoveRequireObjectPropertyOptions {
   localName: string;
@@ -22,31 +13,12 @@ export const removeRequireObjectPattern = (
   source: Collection<unknown>,
   { localName, sourceValue }: RemoveRequireObjectPropertyOptions
 ) => {
-  const requireDeclarators = getRequireDeclaratorsWithObjectPattern(j, source, {
+  const requireObjectPatternProperty = getRequireObjectPatternProperty(j, source, {
     identifierName: localName,
     sourceValue,
   });
 
-  requireDeclarators.forEach((varDeclarator) => {
-    // Remove ObjectProperty from Variable Declarator.
-    const varDeclaratorId = varDeclarator.value.id as ObjectPattern;
-    varDeclaratorId.properties = varDeclaratorId.properties.filter((property) => {
-      if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return true;
-      const propertyValue = (property as Property | ObjectProperty).value;
-      return propertyValue.type !== "Identifier" || propertyValue.name !== localName;
-    });
-
-    // Remove VariableDeclarator if there are no properties.
-    if (varDeclaratorId.properties.length === 0) {
-      const varDeclaration = varDeclarator.parentPath.parentPath;
-      varDeclaration.value.declarations = varDeclaration.value.declarations.filter(
-        (declaration: VariableDeclarator | Identifier) => declaration !== varDeclarator.value
-      );
-
-      // Remove VariableDeclaration if there are no declarations.
-      if (varDeclaration.value.declarations?.length === 0) {
-        removeDeclaration(j, source, varDeclaration);
-      }
-    }
-  });
+  const comments = source.find(j.Program).get("body", 0).node.comments;
+  requireObjectPatternProperty.remove();
+  addTopLevelComments(j, source, comments);
 };
