@@ -1,6 +1,6 @@
-import { CLIENTS_TO_TEST } from "./config";
-import { getClientDeepImportPath } from "./getClientDeepImportPath";
-import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
+import { CLIENTS_TO_TEST } from "./config.ts";
+import { getClientDeepImportPath } from "./getClientDeepImportPath.ts";
+import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode.ts";
 
 export const getServiceImportDeepStarInput = () => {
   let content = "";

@@ -1,8 +1,8 @@
-import { CLIENTS_TO_TEST } from "./config";
-import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
-import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
-import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
-import { getV3PackageImportsCode } from "./getV3PackageImportsCode";
+import { CLIENTS_TO_TEST } from "./config.ts";
+import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix.ts";
+import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName.ts";
+import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode.ts";
+import { getV3PackageImportsCode } from "./getV3PackageImportsCode.ts";
 
 export const getServiceImportDeepWithNameOutput = () => {
   let content = "";

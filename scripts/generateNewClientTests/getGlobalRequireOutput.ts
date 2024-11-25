@@ -1,7 +1,7 @@
-import { CLIENTS_TO_TEST } from "./config";
-import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
-import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
-import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode";
+import { CLIENTS_TO_TEST } from "./config.ts";
+import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName.ts";
+import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode.ts";
+import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode.ts";
 
 export const getGlobalRequireOutput = () => {
   let content = "\n\n";

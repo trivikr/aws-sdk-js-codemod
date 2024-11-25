@@ -8,10 +8,12 @@ import {
   DOCUMENT_CLIENT,
   DYNAMODB,
   DYNAMODB_DOCUMENT_CLIENT,
-} from "../../src/transforms/v2-to-v3/config";
-import { getClientReqRespTypesMap } from "./getClientReqRespTypesMap";
-import { getClientTypesMap } from "./getClientTypesMap";
+} from "../../src/transforms/v2-to-v3/config/index.ts";
+import { getClientReqRespTypesMap } from "./getClientReqRespTypesMap.ts";
+import { getClientTypesMap } from "./getClientTypesMap.ts";
 
+// @ts-expect-error import.meta.dirname is defined in Node.js 22.x used for development.
+const __dirname = import.meta.dirname;
 const execAsync = promisify(exec);
 
 (async () => {
