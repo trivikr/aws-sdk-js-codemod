@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isTypeScriptFile } from "./isTypeScriptFile";
+import { isTypeScriptFile } from "./isTypeScriptFile/index.ts";
 
 describe(isTypeScriptFile.name, () => {
   it.each([
