@@ -35,10 +35,10 @@
   "scripts": {
     "build": "tsc",
     "format": "biome format --write",
-    "generate:map": "tsx scripts/generateClientTypesMap",
-    "generate:tests": "tsx scripts/generateNewClientTests",
+    "generate:map": "node --experimental-strip-types scripts/generateClientTypesMap/index.ts",
+    "generate:tests": "node --experimental-strip-types scripts/generateNewClientTests/index.ts",
     "lint": "biome lint --write",
-    "release": "tsx scripts/testUpdatedIdentifiers && npm run build && changeset publish",
+    "release": "node --experimental-strip-types scripts/testUpdatedIdentifiers/index.ts && npm run build && changeset publish",
     "test": "vitest",
     "version": "changeset version && npm i --package-lock-only"
   },
@@ -52,7 +52,6 @@
     "@types/jscodeshift": "^0.12.0",
     "@types/node": "^16.18.101",
     "aws-sdk": "2.1692.0",
-    "tsx": "^4.7.1",
     "typescript": "~5.7.2",
     "vitest": "~2.0.1"
   },
